@@ -1,5 +1,9 @@
 # Summary Log
 
+## 2026-07-22 04:56 — Steam Community post drafted
+- Verified repo is now PUBLIC.
+- Wrote `steam_post.txt` (v1.0): BBCode post explaining the effigy-achievement bug (achievement never triggers when points are allocated on pickup), the must-use-on-unallocated-save requirement, usage steps, safety, and the public GitHub releases link.
+
 ## 2026-07-22 04:48 — GitHub Release v1.9
 - Working tree was clean and pushed; created release `v1.9` on `AvenisLabs/Palworld-Effigy-Tool` with assets `PalworldEffigyTool.exe` (11.7 MB) and `EFFIGY_README.md`; verified both uploaded.
 - https://github.com/AvenisLabs/Palworld-Effigy-Tool/releases/tag/v1.9
