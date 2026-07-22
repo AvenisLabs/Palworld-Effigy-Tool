@@ -1,5 +1,9 @@
 # Summary Log
 
+## 2026-07-22 04:48 — GitHub Release v1.9
+- Working tree was clean and pushed; created release `v1.9` on `AvenisLabs/Palworld-Effigy-Tool` with assets `PalworldEffigyTool.exe` (11.7 MB) and `EFFIGY_README.md`; verified both uploaded.
+- https://github.com/AvenisLabs/Palworld-Effigy-Tool/releases/tag/v1.9
+
 ## 2026-07-22 04:44 — Readmes refocused on single-player
 - `EFFIGY_README.md`: quick start is now a pure single-player flow (close game → browse → grant → play); dedicated-server + console CLI demoted to one "Advanced" section at the bottom; intro says "made for your own single-player / co-op saves".
 - `README.md` v1.9: intro states single-player is the primary use case; sections reordered GUI (primary) → CLI (advanced); dedicated-server workflow retitled "(advanced — not the primary use case)"; fixed stale `effigy-grant-gui.exe` reference → `PalworldEffigyTool.exe`.
