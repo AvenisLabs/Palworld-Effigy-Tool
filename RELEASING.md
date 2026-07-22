@@ -1,6 +1,7 @@
-# Release Process v1.1
+# Release Process v1.2
 
-*(v1.1: file renames — `README.md` is now the player-facing help and ships
+*(v1.2: notes-handling warning added after a mangling incident.
+v1.1: file renames — `README.md` is now the player-facing help and ships
 as a release asset; developer notes/version history live in `history.md`.)*
 
 Follow this checklist for **every release**. The iron rule: **any change
@@ -75,6 +76,17 @@ The "Verify your download" section must always include the
 beginner-friendly 4 steps (right-click Start → Terminal →
 `Get-FileHash "$env:USERPROFILE\Downloads\PalworldEffigyTool.exe"` →
 compare, case-insensitive, every character).
+
+**Notes are edited on GitHub too — never round-trip them through
+PowerShell strings.** The release description may contain manual edits
+made on the web (e.g. the "Scroll DOWN" banner) — before recreating a
+release, capture the CURRENT body and diff it against the template.
+PowerShell pitfall (caused a mangled release once): capturing
+`gh release view --jq .body` yields an ARRAY of lines, and
+`Set-Content -NoNewline` concatenates array elements WITHOUT newlines,
+destroying all markdown structure. Always author notes as a real file
+(Write/Edit tools or an editor) and pass `--notes-file`; verify with
+`gh release view` afterwards.
 
 ## Why the hash lives ONLY in release notes
 
