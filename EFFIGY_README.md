@@ -13,6 +13,22 @@ Made for your own single-player / co-op saves on Windows (Steam, Palworld
 the single `PalworldEffigyTool.exe` is fully self-contained (no Python, no
 game files needed).
 
+## Why this tool exists — the broken effigy achievement
+
+Palworld's Steam effigy achievement only triggers when your collected
+effigy points are **unallocated**. If you spend effigy points at the Statue
+of Power as you collect them — which is how almost everyone plays — the
+achievement check never sees the numbers it expects and it silently never
+fires, no matter how many effigies you collect afterwards.
+
+This tool grants effigies as collected with the points landing **unspent**,
+so the achievement logic finally sees what it expects.
+
+> **Important:** for the achievement fix to work, use the tool on a save
+> where you have **not allocated any effigy points yet** (e.g. a new
+> world). Allocated points are exactly what breaks the achievement —
+> granting on top of an already-broken save will not un-break it.
+
 ---
 
 ## Quick start

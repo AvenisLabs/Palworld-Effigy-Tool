@@ -1,5 +1,12 @@
 # Summary Log
 
+## 2026-07-22 05:06 — Achievement-bug documentation everywhere
+- `grant_gui.py` v1.5: Help now opens with "The achievement bug (read first)" — why the achievement breaks (points allocated on pickup) and the must-use-unallocated-save rule.
+- `EFFIGY_README.md`: new "Why this tool exists" section with the same explanation + important callout.
+- `README.md` v1.10: "Why" paragraph in the intro.
+- Verified via scripted smoke test; exe rebuilt (exit 0); dist readme synced.
+- Release: replacing v1.9 with v1.10 (v1.9 unannounced; posts link to /releases/latest).
+
 ## 2026-07-22 05:00 — Reddit post drafted
 - Wrote `reddit_post.md` (v1.0): Markdown post for r/Palworld with 3 title options, TL;DR-first structure, bug explanation, unallocated-save requirement, safety/open-source angle, releases link.
 

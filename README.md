@@ -1,5 +1,9 @@
-# Effigy Grant Tool v1.9
+# Effigy Grant Tool v1.10
 
+> v1.10: documented the Steam effigy-achievement bug this tool works
+> around (readmes + in-app help): the achievement only triggers with
+> unallocated effigy points, so the grant must run on a save where no
+> points have been allocated yet.
 > v1.9: docs refocused on single-player saves — the primary audience;
 > dedicated-server use is documented as an advanced/secondary workflow.
 
@@ -25,7 +29,15 @@ Standalone tool (windowed GUI + interactive CLI) that edits a Palworld
 player save (`Players/<uid>.sav`) to grant Pal Effigies by category —
 exactly as if the player picked each one up in the world. The primary use
 case is a player's own local single-player / co-op save; dedicated-server
-saves work too but are a secondary, advanced workflow. What a grant does:
+saves work too but are a secondary, advanced workflow.
+
+**Why:** Palworld's Steam effigy achievement only triggers when collected
+effigy points are unallocated — players who spend points as they collect
+(i.e. nearly everyone) can never earn it. Granting effigies as collected
++ **unspent** lets the achievement logic see what it expects; for that to
+work the grant must run on a save with no effigy points allocated yet.
+
+What a grant does:
 
 - sets the collection flags in `RelicObtainForInstanceFlagByType`
   (the game's authoritative collected state; prevents double-pickup),

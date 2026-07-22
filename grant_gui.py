@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""grant_gui.py v1.4 — minimal tkinter GUI for the effigy grant tool.
+"""grant_gui.py v1.5 — minimal tkinter GUI for the effigy grant tool.
+
+v1.5: Help gains a leading "The achievement bug" section — why the Steam
+      effigy achievement breaks (points allocated on pickup) and why the
+      grant must run on a save with no effigy points allocated.
 
 Copyright © 2026 AvenisLabs (https://avenislabs.com)
 for KarasWorlds.com (https://karasworlds.com). All rights reserved.
@@ -51,6 +55,21 @@ def default_save_root() -> Path | None:
 # (section title, body) pairs — rendered into the Help window; section titles
 # are also jump anchors for the context-sensitive ? buttons.
 HELP_SECTIONS = [
+    ("The achievement bug (read first)", """\
+Palworld's Steam effigy achievement is designed so it only triggers when
+your collected effigy points are UNALLOCATED. If you spend effigy points at
+the Statue of Power as you collect them — which is how almost everyone
+plays — the achievement check never sees the numbers it expects and it
+silently never fires. No amount of further collecting fixes it.
+
+This tool works around that: it grants effigies as collected with the
+points landing UNSPENT, so the achievement logic finally sees what it
+expects.
+
+IMPORTANT: for the achievement fix to work, run the grant on a save where
+you have NOT allocated any effigy points yet (e.g. a new world). Allocated
+points are exactly what breaks the achievement — granting on top of an
+already-broken save will not un-break it."""),
     ("How to use", """\
 1. Click Browse… and select your WORLD SAVE FOLDER (see "Finding your save"
    below). Select the folder itself — NOT the .sav files inside it.
