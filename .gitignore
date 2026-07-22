@@ -14,3 +14,7 @@ save/
 
 # Archives / packaged releases
 *.7z
+
+# Promo drafts — local only, scrubbed from history 2026-07-22
+steam_post.txt
+reddit_post.md

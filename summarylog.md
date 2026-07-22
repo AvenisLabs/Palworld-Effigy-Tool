@@ -1,5 +1,10 @@
 # Summary Log
 
+## 2026-07-22 06:52 — Promo posts scrubbed from git
+- `git filter-repo --invert-paths` removed `steam_post.txt` + `reddit_post.md` from ALL history (0 referencing commits remain); local copies restored and gitignored.
+- Force-pushed rewritten `main`. Gotcha found: the v1.19 tag existed only server-side (gh-created) so it still pinned the old history — release deleted and recreated at the rewritten HEAD with identical notes/assets; round-trip hash unchanged (71CE…BD31).
+- Verified remote: no `post` files in tree, tag v1.19 → new SHA 633a040, history starts from rewritten commits.
+
 ## 2026-07-22 06:40 — UI polish (release v1.19)
 - `grant_gui.py` v1.12–v1.13 (user-tested before commit): Grant moved into Categories row left of compact fixed-width All/None; Load button + its ? removed (Browse auto-loads; Enter in path box loads typed paths); bottom bar is just ? Help.
 - history.md v1.19. Exe rebuilt during testing; hash: 71CEB2B19A2FCBA2B2DDF06FB44DA282447B79EC40980D84B7B16814E10DBD31 → release v1.19 → round-trip verify.
