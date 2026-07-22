@@ -1,4 +1,8 @@
-# Effigy Grant Tool v1.6
+# Effigy Grant Tool v1.7
+
+> v1.7: single-exe distribution — one windowed `PalworldEffigyTool.exe`
+> (GUI) replaces the separate console + GUI exes; the CLI remains available
+> from source (`python grant_cli.py`).
 
 > v1.6: GUI — Browse defaults to `%LOCALAPPDATA%\Pal\Saved\SaveGames`;
 > added ? help buttons and an in-app help page (usage, finding your save,
@@ -78,29 +82,20 @@ behave exactly like the CLI, which also lists players by name.
 
 ## Standalone exe (PyInstaller)
 
-`dist\` holds two fully self-contained builds — palsav,
-the palooz Oodle extension, and `relic_master.json` are bundled, so they run
-on any 64-bit Windows box with no Python and no repo checkout:
+`dist\PalworldEffigyTool.exe` is the single distribution build — a windowed
+GUI with palsav, the palooz Oodle extension, and `relic_master.json`
+bundled, so it runs on any 64-bit Windows box with no Python and no repo
+checkout:
 
 ```powershell
-effigy-grant.exe <save_dir> [--master PATH] [--no-union]   # console
-effigy-grant-gui.exe [save_dir]                            # windowed
+PalworldEffigyTool.exe [save_dir]      # windowed GUI; optional pre-filled folder
+python grant_cli.py <save_dir>         # console workflow needs a source checkout
 ```
-
-The GUI exe rebuild uses the same command as below with
-`--windowed --name effigy-grant-gui` and `grant_gui.py` as the script.
 
 Rebuild (from repo root; requires PyInstaller and the cached fork):
 
 ```powershell
-python -m PyInstaller --onefile --console --name effigy-grant `
-  --paths . `
-  --paths F:/Workspace/palworld/tools/paldex_import/cache/PalworldSaveTools/src/palsav `
-  --paths F:/Workspace/palworld/tools/paldex_import/cache/PalworldSaveTools/src/palsav/palooz/build/lib.win-amd64-cpython-312 `
-  --hidden-import palooz `
-  --add-data "relic_master.json;." `
-  --distpath dist --workpath build `
-  --specpath build --noconfirm grant_cli.py
+python -m PyInstaller --distpath dist --workpath build --noconfirm build\palworld-effigy-tool.spec
 ```
 
 `build/` and `dist/` are gitignored (the exe stays local). Benign analysis

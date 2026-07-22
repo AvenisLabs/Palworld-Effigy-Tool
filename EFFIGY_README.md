@@ -9,8 +9,9 @@ collected each one:
 - the in-game capture-power bookkeeping stays consistent.
 
 Works on dedicated-server world saves from Palworld 1.0+ (the current
-Oodle-compressed `.sav` format). Nothing to install — the `.exe` files are
-fully self-contained (no Python, no game files needed).
+Oodle-compressed `.sav` format). Nothing to install — the single
+`PalworldEffigyTool.exe` is fully self-contained (no Python, no game files
+needed).
 
 ---
 
@@ -28,7 +29,7 @@ fully self-contained (no Python, no game files needed).
      `.../Pal/Saved/SaveGames/0/<32-character-world-id>/`.
      You need the `Players` subfolder; grab `Level.sav` too if you want
      player names shown (recommended — it's what lets you pick by name).
-3. Run **`effigy-grant-gui.exe`**, click **Browse…**, select the world
+3. Run **`PalworldEffigyTool.exe`**, click **Browse…**, select the world
    folder. Players appear by in-game name, e.g. `Alice  (1A2B3C4D)`.
    Stuck? The **?** buttons in the app open a help page that covers where
    saves live and what to do if yours isn't there.
@@ -44,8 +45,9 @@ online, their in-game state overwrites your edit when they log off.
 
 ## Console version
 
-`effigy-grant.exe <save_folder>` does the same thing as a step-by-step
-text menu (player number → categories like `1,3-5` or `all` → type `YES`).
+For advanced users: the same grant flow exists as a step-by-step text menu
+(player number → categories like `1,3-5` or `all` → type `YES`), run from a
+source checkout with `python grant_cli.py <save_folder>`.
 
 ## Safety / undo
 

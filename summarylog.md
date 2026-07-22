@@ -1,5 +1,11 @@
 # Summary Log
 
+## 2026-07-22 04:22 — Single-exe distribution
+- New `build\palworld-effigy-tool.spec` (v1.0): one windowed `PalworldEffigyTool.exe` (11.7 MB) replaces the separate console + GUI exes; CLI remains available from source (`python grant_cli.py`). Rationale: Windows PEs are console- or windowed-subsystem at link time; dual-mode hacks break the CLI's interactive stdin.
+- Deleted old specs/exes and stale build dirs; `dist\` now holds only the exe + readme.
+- Docs: `README.md` v1.7 (single-exe section, spec-based rebuild command), `EFFIGY_README.md` updated (single exe; console = source checkout); synced to `dist\`.
+- Verified: build exit 0, warnings all benign (same documented set), exe launches OK.
+
 ## 2026-07-22 04:14 — GitHub remote recreated
 - Created private repo `AvenisLabs/Palworld-Effigy-Tool`, pushed `main` (4 commits, sanitized history only), upstream tracking set.
 - Verified remote tree: 12 clean files — no exes, save data, or build output.
