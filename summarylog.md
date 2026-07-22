@@ -1,5 +1,9 @@
 # Summary Log
 
+## 2026-07-22 04:14 — GitHub remote recreated
+- Created private repo `AvenisLabs/Palworld-Effigy-Tool`, pushed `main` (4 commits, sanitized history only), upstream tracking set.
+- Verified remote tree: 12 clean files — no exes, save data, or build output.
+
 ## 2026-07-22 04:10 — GUI: default browse location + in-app help; exes rebuilt
 - `grant_gui.py` v1.3: Browse now opens at `%LOCALAPPDATA%\Pal\Saved\SaveGames` when the path box is empty (keeps the user's current folder otherwise); added `?` button on the folder row (jumps to "Finding your save") and `? Help` in the bottom bar; new Help page (Toplevel) with sections: How to use, Finding your save, Safety/undo — covers select-the-folder-not-files and fallback locations if Browse fails; "No player saves" error now explains folder-vs-file and points at `?`.
 - Docs: `README.md` v1.6 (GUI section), `EFFIGY_README.md` quick start rewritten for local/co-op vs dedicated-server saves; synced to `dist\`.
