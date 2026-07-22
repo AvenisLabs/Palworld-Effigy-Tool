@@ -1,0 +1,16 @@
+# Python bytecode
+__pycache__/
+*.pyc
+
+# PyInstaller output — regenerable from the .spec files, which we DO keep
+build/*
+!build/*.spec
+dist/
+
+# Palworld save data — user game data, never commit
+*.sav
+*.sav.bak*
+save/
+
+# Archives / packaged releases
+*.7z
