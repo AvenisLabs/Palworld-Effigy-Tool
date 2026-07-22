@@ -1,4 +1,7 @@
-# Effigy Grant Tool v1.12
+# Effigy Grant Tool v1.13
+
+> v1.13: release process documented in `RELEASING.md` (docs only — exe,
+> hash, and release v1.12 unchanged).
 
 > **⚠️ Official source:** this public repository
 > (`github.com/AvenisLabs/Palworld-Effigy-Tool`) is the **only**
