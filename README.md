@@ -1,4 +1,7 @@
-# Effigy Grant Tool v1.8
+# Effigy Grant Tool v1.9
+
+> v1.9: docs refocused on single-player saves — the primary audience;
+> dedicated-server use is documented as an advanced/secondary workflow.
 
 > v1.8: single-player focus (done dialog no longer mentions copying back to
 > a server); © 2026 AvenisLabs branding in title bar, code headers, and an
@@ -18,9 +21,11 @@
 > palworld repo). The PalworldSaveTools fork is still consumed from the old
 > repo's cache by default; see Requirements.
 
-Standalone interactive CLI that edits a Palworld player save
-(`Players/<uid>.sav`) to grant Pal Effigies by category — exactly as if the
-player picked each one up in the world:
+Standalone tool (windowed GUI + interactive CLI) that edits a Palworld
+player save (`Players/<uid>.sav`) to grant Pal Effigies by category —
+exactly as if the player picked each one up in the world. The primary use
+case is a player's own local single-player / co-op save; dedicated-server
+saves work too but are a secondary, advanced workflow. What a grant does:
 
 - sets the collection flags in `RelicObtainForInstanceFlagByType`
   (the game's authoritative collected state; prevents double-pickup),
@@ -58,24 +63,13 @@ list (the union shows up as Lifmunk 154/153 in practice).
   <fork>/src/palsav/palooz`) and/or point `EFFIGY_FORK_DIR` at a fork
   checkout with a working palooz.
 
-## Usage
+## GUI (primary)
 
 ```powershell
-python grant_cli.py <save_dir> [--master PATH] [--no-union]
+python grant_gui.py [save_dir]     # or PalworldEffigyTool.exe
 ```
 
-The tool walks you through: player pick → category pick (`1,3-5` or `all`)
-→ dry-run summary → type `YES` → write. It always creates a timestamped
-`.bak-*` beside the file first, then re-decodes what it wrote and verifies
-every flag and balance; on any mismatch it restores the backup and exits 1.
-
-## GUI
-
-```powershell
-python grant_gui.py [save_dir]     # or effigy-grant-gui.exe
-```
-
-Minimal tkinter window over the same modules: Browse to the save folder
+Minimal tkinter window over the shared modules: Browse to the save folder
 (opens at `%LOCALAPPDATA%\Pal\Saved\SaveGames` when the path box is empty) →
 pick a player (listed by in-game name when `Level.sav` is present, decoded
 automatically in ~0.1s; UID fallback otherwise) → tick categories (each
@@ -83,6 +77,18 @@ shows collected/total) → **Grant N NEW**. The ? buttons open an in-app help
 page (usage, finding your save, safety/undo). Confirmation dialog shows the
 per-category dry run; backup + post-write verification + auto-restore
 behave exactly like the CLI, which also lists players by name.
+
+## CLI (advanced)
+
+```powershell
+python grant_cli.py <save_dir> [--master PATH] [--no-union]
+```
+
+Same grant flow as a step-by-step text menu: player pick → category pick
+(`1,3-5` or `all`) → dry-run summary → type `YES` → write. It always
+creates a timestamped `.bak-*` beside the file first, then re-decodes what
+it wrote and verifies every flag and balance; on any mismatch it restores
+the backup and exits 1.
 
 ## Standalone exe (PyInstaller)
 
@@ -106,7 +112,7 @@ python -m PyInstaller --distpath dist --workpath build --noconfirm build\palworl
 warnings: `palworld_aio` (unused palsav backup command) and `recordclass`
 (optional palsav fallback, not installed in the tested env either).
 
-## Dedicated-server workflow
+## Dedicated-server workflow (advanced — not the primary use case)
 
 The game autosaves continuously — never edit a save the server is using,
 and keep the target player OFFLINE for the whole procedure (their in-memory

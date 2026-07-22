@@ -1,5 +1,10 @@
 # Summary Log
 
+## 2026-07-22 04:44 — Readmes refocused on single-player
+- `EFFIGY_README.md`: quick start is now a pure single-player flow (close game → browse → grant → play); dedicated-server + console CLI demoted to one "Advanced" section at the bottom; intro says "made for your own single-player / co-op saves".
+- `README.md` v1.9: intro states single-player is the primary use case; sections reordered GUI (primary) → CLI (advanced); dedicated-server workflow retitled "(advanced — not the primary use case)"; fixed stale `effigy-grant-gui.exe` reference → `PalworldEffigyTool.exe`.
+- Synced dist copy. No code changes — no rebuild needed.
+
 ## 2026-07-22 04:35 — Branding + single-player polish
 - `grant_gui.py` v1.4: done dialog no longer tells players to copy the file back to a server (single-player focus; server guidance stays in Help/readme); title bar now "Effigy Grant Tool — © 2026 AvenisLabs for KarasWorlds.com"; new About help section with links to avenislabs.com and karasworlds.com.
 - Copyright headers added to all code files: grant_cli v1.4, grant_edits v1.2, grant_master v1.2, grant_savio v1.6, spec v1.1.
