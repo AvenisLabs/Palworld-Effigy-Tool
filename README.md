@@ -1,5 +1,8 @@
-# Effigy Grant Tool v1.5
+# Effigy Grant Tool v1.6
 
+> v1.6: GUI — Browse defaults to `%LOCALAPPDATA%\Pal\Saved\SaveGames`;
+> added ? help buttons and an in-app help page (usage, finding your save,
+> select-the-folder-not-files, safety/undo).
 > v1.5: sanitized — all server/host-specific details removed; workflow is
 > now documented with placeholders.
 > v1.4: moved to its own repo — source now lives at the repo root of
@@ -64,10 +67,12 @@ every flag and balance; on any mismatch it restores the backup and exits 1.
 python grant_gui.py [save_dir]     # or effigy-grant-gui.exe
 ```
 
-Minimal tkinter window over the same modules: Browse to the save folder →
+Minimal tkinter window over the same modules: Browse to the save folder
+(opens at `%LOCALAPPDATA%\Pal\Saved\SaveGames` when the path box is empty) →
 pick a player (listed by in-game name when `Level.sav` is present, decoded
 automatically in ~0.1s; UID fallback otherwise) → tick categories (each
-shows collected/total) → **Grant N NEW**. Confirmation dialog shows the
+shows collected/total) → **Grant N NEW**. The ? buttons open an in-app help
+page (usage, finding your save, safety/undo). Confirmation dialog shows the
 per-category dry run; backup + post-write verification + auto-restore
 behave exactly like the CLI, which also lists players by name.
 

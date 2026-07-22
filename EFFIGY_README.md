@@ -16,15 +16,22 @@ fully self-contained (no Python, no game files needed).
 
 ## Quick start (GUI)
 
-1. **Stop the Palworld server.** The game rewrites its save continuously;
-   editing a save the server is using will lose your changes.
-2. Copy the world save folder to your PC. On a typical Linux dedicated
-   server it lives at:
-   `.../Pal/Saved/SaveGames/0/<32-character-world-id>/`
-   You need the `Players` subfolder; grab `Level.sav` too if you want
-   player names shown (recommended — it's what lets you pick by name).
-3. Run **`effigy-grant-gui.exe`**, click **Browse…**, select the copied
+1. **Close the game / stop the Palworld server.** The game rewrites its
+   save continuously; editing a save that's in use will lose your changes.
+2. Find your world save folder:
+   - **Local / co-op (Steam on Windows):** Browse… opens straight at
+     `%LOCALAPPDATA%\Pal\Saved\SaveGames` — go into your Steam-ID folder,
+     then select the world folder (32-character name). **Select the folder
+     that contains `Players`, not any of the files inside.**
+   - **Dedicated server:** copy the world save folder to your PC first; on
+     a typical Linux server it lives at
+     `.../Pal/Saved/SaveGames/0/<32-character-world-id>/`.
+     You need the `Players` subfolder; grab `Level.sav` too if you want
+     player names shown (recommended — it's what lets you pick by name).
+3. Run **`effigy-grant-gui.exe`**, click **Browse…**, select the world
    folder. Players appear by in-game name, e.g. `Alice  (1A2B3C4D)`.
+   Stuck? The **?** buttons in the app open a help page that covers where
+   saves live and what to do if yours isn't there.
 4. Click a player, tick the effigy categories to grant (each row shows
    `collected/total`), or **All**.
 5. Click **Grant N NEW**. You'll get a confirmation with a per-category

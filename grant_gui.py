@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
-"""grant_gui.py v1.2 — minimal tkinter GUI for the effigy grant tool.
+"""grant_gui.py v1.3 — minimal tkinter GUI for the effigy grant tool.
 
+v1.3: Browse now opens at %LOCALAPPDATA%\\Pal\\Saved\\SaveGames (the default
+      Windows save location) when the path box is empty; added ? help buttons
+      and a Help page (usage, finding your save, folder-not-files, safety).
 v1.2: sanitized — server-specific references removed from the done dialog.
 
 Thin window over grant_edits/grant_master/grant_savio (all logic lives
@@ -12,6 +15,7 @@ v1.1: player list shows names, not UIDs — Level.sav is decoded automatically
       in the background on folder load; UID is the fallback when no name is
       available (no Level.sav, or a torn copy).
 """
+import os
 import queue
 import sys
 import threading
@@ -23,6 +27,74 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))  # dual-mode contract
 import grant_edits as ge
 import grant_master as gm
 import grant_savio as sio
+
+
+def default_save_root() -> Path | None:
+    """The standard Windows local-save location, if it exists.
+
+    Steam stores local/co-op world saves under
+    %LOCALAPPDATA%\\Pal\\Saved\\SaveGames\\<steam-id>\\<world-id>\\.
+    """
+    local = os.environ.get("LOCALAPPDATA")
+    if not local:
+        return None
+    root = Path(local) / "Pal" / "Saved" / "SaveGames"
+    return root if root.is_dir() else None
+
+
+# (section title, body) pairs — rendered into the Help window; section titles
+# are also jump anchors for the context-sensitive ? buttons.
+HELP_SECTIONS = [
+    ("How to use", """\
+1. Click Browse… and select your WORLD SAVE FOLDER (see "Finding your save"
+   below). Select the folder itself — NOT the .sav files inside it.
+2. Pick a player from the list (shown by in-game name when Level.sav is
+   present, otherwise by UID).
+3. Tick the effigy categories to grant — each row shows collected/total —
+   or use All / None.
+4. Click "Grant N NEW". You get a per-category confirmation first; a
+   timestamped backup (<uid>.sav.bak-<date>-<time>) is written before any
+   change, and the result is re-checked after writing (auto-restore on any
+   mismatch).
+5. Playing on a dedicated server? Copy the edited Players\\<uid>.sav back to
+   the server with the server STOPPED and the player logged out."""),
+    ("Finding your save", """\
+Browse opens at the usual Windows save location:
+
+    %LOCALAPPDATA%\\Pal\\Saved\\SaveGames
+
+Inside it: one folder per Steam account (a long number), then one folder per
+world (a 32-character name like 0123ABCD...). SELECT THAT WORLD FOLDER —
+the one that directly contains a "Players" subfolder (and usually
+Level.sav). Do not select Level.sav or any other file.
+
+If Browse doesn't open there, or the folder doesn't exist:
+- Paste  %LOCALAPPDATA%\\Pal\\Saved\\SaveGames  into File Explorer's address
+  bar and press Enter. If you have several worlds, the right one is usually
+  the most recently modified folder.
+- Steam users can also check:
+  C:\\Users\\<you>\\AppData\\Local\\Pal\\Saved\\SaveGames
+- Dedicated server: the world folder lives on the server under
+  .../Pal/Saved/SaveGames/0/<world-id>. Stop the server, copy that whole
+  folder to this PC, edit it here, then copy the edited
+  Players\\<uid>.sav back.
+- Xbox app / Microsoft Store (Game Pass) installs keep saves in a protected
+  package container — those saves are not directly editable by this tool.
+
+Wrong folder selected? The tool will say "No player saves under ...\\Players"
+— go one level down (into the world folder) or up until the selected folder
+directly contains "Players"."""),
+    ("Safety / undo", """\
+- A backup is always written next to the original before any change:
+  <uid>.sav.bak-<date>-<time>. To undo, copy it back over the edited file
+  (game/server not running).
+- After writing, the tool re-opens the file and verifies every flag and
+  balance; on any mismatch the backup is restored automatically.
+- Only the selected Players\\<uid>.sav is ever written. Level.sav is only
+  read (for player names).
+- The player being edited must not be in the game while you edit — their
+  live state would overwrite the change."""),
+]
 
 
 def dry_run_lines(types_meta: dict, sets: dict, already: dict,
@@ -60,6 +132,10 @@ class App:
                                                        expand=True)
         ttk.Button(top, text="Browse…", command=self.browse).pack(side="left", padx=4)
         ttk.Button(top, text="Load", command=self.load_dir).pack(side="left")
+        # Context help: jumps straight to the save-locating section.
+        ttk.Button(top, text="?", width=2,
+                   command=lambda: self.show_help("Finding your save")).pack(
+            side="left", padx=(4, 0))
 
         mid = ttk.Frame(root, padding=6)
         mid.pack(fill="both", expand=True)
@@ -82,9 +158,11 @@ class App:
 
         bottom = ttk.Frame(root, padding=6)
         bottom.pack(fill="x")
+        ttk.Button(bottom, text="? Help", command=self.show_help).pack(side="left")
         self.grant_btn = ttk.Button(bottom, text="Grant", command=self.grant,
                                     state="disabled")
         self.grant_btn.pack(side="right")
+        self.help_win: tk.Toplevel | None = None  # reused if already open
         self.status = tk.Text(root, height=8, state="disabled")
         self.status.pack(fill="x", padx=6, pady=(0, 6))
 
@@ -97,10 +175,43 @@ class App:
         self.root.update_idletasks()
 
     def browse(self):
-        d = filedialog.askdirectory(title="Save folder (contains Players/)")
+        # Start where the user already is; otherwise the standard save root.
+        cur = Path(self.dir_var.get().strip()) if self.dir_var.get().strip() else None
+        initial = cur if (cur and cur.is_dir()) else default_save_root()
+        d = filedialog.askdirectory(
+            title="Select the WORLD SAVE FOLDER (contains Players\\) — not a file",
+            initialdir=str(initial) if initial else None)
         if d:
             self.dir_var.set(d)
             self.load_dir()
+
+    # ---------- help ----------
+    def show_help(self, section: str | None = None):
+        """Open (or focus) the Help page; optionally jump to a section."""
+        if self.help_win is None or not self.help_win.winfo_exists():
+            self.help_win = tk.Toplevel(self.root)
+            self.help_win.title("Effigy Grant — Help")
+            self.help_win.geometry("620x520")
+            txt = tk.Text(self.help_win, wrap="word", padx=10, pady=8)
+            sb = ttk.Scrollbar(self.help_win, command=txt.yview)
+            txt.configure(yscrollcommand=sb.set)
+            sb.pack(side="right", fill="y")
+            txt.pack(fill="both", expand=True)
+            txt.tag_configure("h", font=("TkDefaultFont", 11, "bold"),
+                              spacing1=10, spacing3=4)
+            for title, body in HELP_SECTIONS:
+                txt.insert("end", title + "\n", ("h", f"sec:{title}"))
+                txt.insert("end", body + "\n")
+            txt.configure(state="disabled")
+            self.help_text = txt
+        self.help_win.deiconify()
+        self.help_win.lift()
+        if section:  # scroll the section heading to the top of the window
+            rng = self.help_text.tag_ranges(f"sec:{section}")
+            if rng:
+                self.help_text.see("end")       # force from bottom so the
+                self.help_text.see(rng[0])      # target lands at the top
+                self.help_text.yview(f"{rng[0]} linestart")
 
     # ---------- load flow ----------
     def load_dir(self):
@@ -109,8 +220,12 @@ class App:
         self.player_list.delete(0, "end")
         self.gf = None
         if not self.saves:
-            messagebox.showerror("Effigy Grant",
-                                 f"No player saves under {save_dir / 'Players'}")
+            messagebox.showerror(
+                "Effigy Grant",
+                f"No player saves under {save_dir / 'Players'}\n\n"
+                "Make sure you selected the world save FOLDER — the one that "
+                "directly contains a Players subfolder — not a file inside "
+                "it.\n\nClick the ? button for help finding your save.")
             return
         self.log(f"loaded {len(self.saves)} player save(s) from {save_dir}")
         # Master list + observed union across every player save in the folder.
