@@ -1,5 +1,10 @@
 # Summary Log
 
+## 2026-07-22 03:56 — Cleanup confirmed
+- User deleted `dist\Pal-effigy-Fix.7z` (contained pre-sanitize readme); verified gone.
+- Verified `AvenisLabs/Palworld-Effigy-Fix` no longer exists on GitHub (user deleted it).
+- Local repo remains: single sanitized commit on `main`, no remotes. Ready to recreate + push on request.
+
 ## 2026-07-22 03:52 — Sensitive-data clean sweep + history flush
 - Scrubbed all private info from every file: SSH user/IP/hostname, server paths, world save GUID, tracker domain, portal project references, real player name/UID example. Replaced with generic placeholders.
 - Files touched: `README.md` (v1.5, workflow now placeholder-based), `EFFIGY_README.md` (+ synced copy in `dist\`), `relic_master.json` (provenance genericized), `grant_cli.py` (v1.3), `grant_gui.py` (v1.2), `grant_edits.py` (v1.1), `grant_master.py` (v1.1).
