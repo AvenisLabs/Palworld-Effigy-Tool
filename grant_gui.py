@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""grant_gui.py v1.6 — minimal tkinter GUI for the effigy grant tool.
+"""grant_gui.py v1.7 — minimal tkinter GUI for the effigy grant tool.
+
+v1.7: official-source help section now includes step-by-step SHA-256
+      verification instructions (Get-FileHash vs the release-page hash).
 
 v1.6: Help gains an "Official source" section — the public GitHub repo is
       the ONLY distribution point; copies found elsewhere may be
@@ -132,7 +135,21 @@ It is NOT distributed anywhere else — no other download sites, no mirrors,
 no reuploads. If you got this tool from anywhere other than that
 repository's Releases page, it could be COMPROMISED (tampered with or
 bundled with malware). Delete it and download a fresh copy from the
-official repository."""),
+official repository.
+
+HOW TO VERIFY YOUR DOWNLOAD (no experience needed):
+Every release page publishes the file's SHA-256 checksum — a long
+fingerprint that changes if the file is altered in any way.
+1. Right-click the Windows Start button and choose "Terminal" (or
+   "Windows PowerShell").
+2. Type the following and press Enter (adjust the path if you saved the
+   file somewhere other than Downloads):
+      Get-FileHash "$env:USERPROFILE\\Downloads\\PalworldEffigyTool.exe"
+3. Compare the Hash value it prints with the SHA256 on the official
+   release page. Every character must match (upper/lower case doesn't
+   matter).
+4. Match = genuine download. No match = delete the file and download
+   again from the official repository only."""),
     ("About", """\
 Effigy Grant Tool
 © 2026 AvenisLabs — https://avenislabs.com

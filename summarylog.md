@@ -1,5 +1,11 @@
 # Summary Log
 
+## 2026-07-22 05:22 — SHA-256 verification
+- Hash published in release notes only (the trusted source — files shipping beside the exe can be tampered with too); readmes + in-app help teach HOW to verify.
+- `grant_gui.py` v1.7: verification walk-through in the official-source help section; exe rebuilt AFTER the help change, then hashed: FF20C8B8F1F57675B8D0EEF0D94583798201E6F423F404300A823C19F2A89400.
+- `EFFIGY_README.md`: beginner "How to verify your download" subsection (right-click Start → Terminal → Get-FileHash → compare). `README.md` v1.12: verification note in the warning block.
+- Release rolled v1.11 → v1.12 (tag matches README) with hash + instructions in notes; NOTE: each future release must publish its own new hash.
+
 ## 2026-07-22 05:14 — Official-source warning
 - `grant_gui.py` v1.6: new Help section "Official source — beware of copies" (GitHub repo is the ONLY distribution point; copies elsewhere may be compromised); repo link added to About.
 - `EFFIGY_README.md`: ⚠️ Official source section; `README.md` v1.11: warning blockquote at the top.

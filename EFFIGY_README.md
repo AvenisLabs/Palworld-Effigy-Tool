@@ -42,6 +42,27 @@ repository's Releases page, **it could be compromised** (tampered with or
 bundled with malware). Delete it and download a fresh copy from the
 official repository.
 
+### How to verify your download (no experience needed)
+
+Every release page publishes the exe's **SHA-256 checksum** — a long
+fingerprint that changes if the file is altered in any way. Checking it
+takes under a minute:
+
+1. Right-click the Windows **Start** button and choose **Terminal** (or
+   **Windows PowerShell**).
+2. Type this and press Enter (adjust the path if you saved the file
+   somewhere other than Downloads):
+
+   ```powershell
+   Get-FileHash "$env:USERPROFILE\Downloads\PalworldEffigyTool.exe"
+   ```
+
+3. Compare the `Hash` value it prints with the SHA256 shown on the
+   official release page. **Every character must match** (upper/lower
+   case doesn't matter).
+4. Match → your download is genuine. No match → delete the file and
+   download again from the official repository only.
+
 ---
 
 ## Quick start

@@ -1,11 +1,16 @@
-# Effigy Grant Tool v1.11
+# Effigy Grant Tool v1.12
 
 > **⚠️ Official source:** this public repository
 > (`github.com/AvenisLabs/Palworld-Effigy-Tool`) is the **only**
 > distribution point for this tool. It is not distributed anywhere else —
 > copies found on other sites may be compromised. Download only from this
-> repo's Releases page.
+> repo's Releases page, and verify the exe's SHA-256 checksum against the
+> one published in the release notes
+> (`Get-FileHash PalworldEffigyTool.exe` in PowerShell; beginner
+> walk-through in `EFFIGY_README.md` and the in-app Help).
 
+> v1.12: SHA-256 verification — hash published per release, beginner
+> instructions in readmes and in-app help.
 > v1.11: official-source warning added to readmes and in-app help.
 > v1.10: documented the Steam effigy-achievement bug this tool works
 > around (readmes + in-app help): the achievement only triggers with
