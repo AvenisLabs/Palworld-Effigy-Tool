@@ -9,8 +9,10 @@
 - The public GitHub repo (`AvenisLabs/Palworld-Effigy-Tool`) is the ONLY
   distribution point — keep the official-source warnings in the readmes,
   in-app Help, and release notes intact.
-- `EFFIGY_README.md` is the player-facing readme and ships as a release
-  asset; keep `dist\EFFIGY_README.md` in sync when it changes.
+- `README.md` is the player-facing help (GitHub landing page) and ships as
+  a release asset; keep `dist\README.md` in sync when it changes.
+  Developer notes and the version history live in `history.md` — bump its
+  title version on tool changes.
 - Keep docs single-player-first; dedicated-server usage is an advanced,
   secondary workflow.
 - No private info anywhere (server hosts/IPs/usernames/domains, real

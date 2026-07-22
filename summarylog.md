@@ -1,5 +1,10 @@
 # Summary Log
 
+## 2026-07-22 06:00 — Doc restructure: helpfile is now the GitHub README
+- `git mv`: old dev `README.md` → `history.md` (v1.16, keeps the version log + dev docs); player helpfile `EFFIGY_README.md` → `README.md` (now the GitHub landing page).
+- References updated: `RELEASING.md` v1.1 (asset name, sync step, version-bump target now history.md), `CLAUDE.md`, history.md warning block. Old summarylog entries left as historical record.
+- dist: `EFFIGY_README.md` removed, `README.md` synced. Release v1.15 assets swapped (README.md uploaded, EFFIGY_README.md deleted) and notes reference fixed — exe/hash unchanged, no rebuild per RELEASING.md.
+
 ## 2026-07-22 05:50 — Notice reflow fix + startup Help (release v1.15)
 - `grant_gui.py` v1.9: notice paragraphs are single strings so the dialog wraps them itself (ragged mid-sentence breaks fixed, per user screenshot); Help window now auto-opens beside the main window on startup (offset +12px right, same y), scrolled to top, keyboard focus kept on main window.
 - `README.md` v1.15. RELEASING.md followed: smoke test (paragraph reflow assertion + full main() flow) → rebuild (exit 0, same 14 benign warns) → hash: D1DF2BA884A8343DC73F26742CB90F852364F809E9F9CC4F5087E8A1921FB39E → release v1.15 → round-trip verify.

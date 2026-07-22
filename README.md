@@ -1,191 +1,142 @@
-# Effigy Grant Tool v1.15
+# Pal Effigy Grant Tool
 
-> v1.15: launch-notice text reflows cleanly; Help opens automatically
-> beside the main window on startup (top of the page).
-> v1.14: GUI shows an official-source notice popup on every launch,
-> acknowledged with OK before the main window opens.
-> v1.13: release process documented in `RELEASING.md` (docs only — exe,
-> hash, and release v1.12 unchanged).
+Grants Pal Effigies (Lifmunk Effigies and the other 11 effigy types) to a
+player in a Palworld world save — exactly as if the player had walked up and
+collected each one:
 
-> **⚠️ Official source:** this public repository
-> (`github.com/AvenisLabs/Palworld-Effigy-Tool`) is the **only**
-> distribution point for this tool. It is not distributed anywhere else —
-> copies found on other sites may be compromised. Download only from this
-> repo's Releases page, and verify the exe's SHA-256 checksum against the
-> one published in the release notes
-> (`Get-FileHash PalworldEffigyTool.exe` in PowerShell; beginner
-> walk-through in `EFFIGY_README.md` and the in-app Help).
+- they count as **collected** (map/completion, no double pickup),
+- they are **spendable at the Statue of Power**,
+- the in-game capture-power bookkeeping stays consistent.
 
-> v1.12: SHA-256 verification — hash published per release, beginner
-> instructions in readmes and in-app help.
-> v1.11: official-source warning added to readmes and in-app help.
-> v1.10: documented the Steam effigy-achievement bug this tool works
-> around (readmes + in-app help): the achievement only triggers with
-> unallocated effigy points, so the grant must run on a save where no
-> points have been allocated yet.
-> v1.9: docs refocused on single-player saves — the primary audience;
-> dedicated-server use is documented as an advanced/secondary workflow.
+Made for your own single-player / co-op saves on Windows (Steam, Palworld
+1.0+ — the current Oodle-compressed `.sav` format). Nothing to install —
+the single `PalworldEffigyTool.exe` is fully self-contained (no Python, no
+game files needed).
 
-> v1.8: single-player focus (done dialog no longer mentions copying back to
-> a server); © 2026 AvenisLabs branding in title bar, code headers, and an
-> About help section with site links.
+## Why this tool exists — the broken effigy achievement
 
-> v1.7: single-exe distribution — one windowed `PalworldEffigyTool.exe`
-> (GUI) replaces the separate console + GUI exes; the CLI remains available
-> from source (`python grant_cli.py`).
+Palworld's Steam effigy achievement only triggers when your collected
+effigy points are **unallocated**. If you spend effigy points at the Statue
+of Power as you collect them — which is how almost everyone plays — the
+achievement check never sees the numbers it expects and it silently never
+fires, no matter how many effigies you collect afterwards.
 
-> v1.6: GUI — Browse defaults to `%LOCALAPPDATA%\Pal\Saved\SaveGames`;
-> added ? help buttons and an in-app help page (usage, finding your save,
-> select-the-folder-not-files, safety/undo).
-> v1.5: sanitized — all server/host-specific details removed; workflow is
-> now documented with placeholders.
-> v1.4: moved to its own repo — source now lives at the repo root of
-> `F:\Workspace\Palworld_effigy` (was `tools\effigy_grant\` inside the
-> palworld repo). The PalworldSaveTools fork is still consumed from the old
-> repo's cache by default; see Requirements.
+This tool grants effigies as collected with the points landing **unspent**,
+so the achievement logic finally sees what it expects.
 
-Standalone tool (windowed GUI + interactive CLI) that edits a Palworld
-player save (`Players/<uid>.sav`) to grant Pal Effigies by category —
-exactly as if the player picked each one up in the world. The primary use
-case is a player's own local single-player / co-op save; dedicated-server
-saves work too but are a secondary, advanced workflow.
+> **Important:** for the achievement fix to work, use the tool on a save
+> where you have **not allocated any effigy points yet** (e.g. a new
+> world). Allocated points are exactly what breaks the achievement —
+> granting on top of an already-broken save will not un-break it.
 
-**Why:** Palworld's Steam effigy achievement only triggers when collected
-effigy points are unallocated — players who spend points as they collect
-(i.e. nearly everyone) can never earn it. Granting effigies as collected
-+ **unspent** lets the achievement logic see what it expects; for that to
-work the grant must run on a save with no effigy points allocated yet.
+## ⚠️ Official source — beware of copies
 
-What a grant does:
+The **only** source for this tool is the public open-source GitHub
+repository:
 
-- sets the collection flags in `RelicObtainForInstanceFlagByType`
-  (the game's authoritative collected state; prevents double-pickup),
-- bumps the **unspent** balances (`RelicPossessNumMap`) so the effigies are
-  spendable at the Statue of Power,
-- for Lifmunk (capture power) also mirrors the legacy flat
-  `RelicObtainForInstanceFlag` map and `RelicPossessNum`, keeping an
-  invariant observed on every real player save examined.
+**https://github.com/AvenisLabs/Palworld-Effigy-Tool**
 
-GUID source: vendored `relic_master.json` (405 effigies, derived from
-palworld-save-pal's relic data) **plus** a union with GUIDs observed as
-collected across the other player saves in the same folder — this catches
-at least one effigy that exists in the world but is missing from the data
-list (the union shows up as Lifmunk 154/153 in practice).
+It is **not** distributed anywhere else — no other download sites, no
+mirrors, no reuploads. If you got this tool from anywhere other than that
+repository's Releases page, **it could be compromised** (tampered with or
+bundled with malware). Delete it and download a fresh copy from the
+official repository.
 
-## Save files needed
+### How to verify your download (no experience needed)
 
-| File | Required | Why |
-|---|---|---|
-| `Players/<uid>.sav` | yes | the edit target — ALL effigy state lives here |
-| sibling `Players/*.sav` | recommended | observed-GUID union (missing-effigy coverage) |
-| `Level.sav` | optional | player names in the picker (unreadable copies are tolerated and just skip names) |
+Every release page publishes the exe's **SHA-256 checksum** — a long
+fingerprint that changes if the file is altered in any way. Checking it
+takes under a minute:
 
-`_dps.sav` sidecars are ignored. `Level.sav` is never modified.
+1. Right-click the Windows **Start** button and choose **Terminal** (or
+   **Windows PowerShell**).
+2. Type this and press Enter (adjust the path if you saved the file
+   somewhere other than Downloads):
 
-## Requirements
+   ```powershell
+   Get-FileHash "$env:USERPROFILE\Downloads\PalworldEffigyTool.exe"
+   ```
 
-- Windows, Python 3.12 (the cached PalworldSaveTools fork ships a prebuilt
-  `palooz` Oodle extension for cp312-win64 — nothing to install).
-- Fork lookup order (`grant_savio.py`): `EFFIGY_FORK_DIR` env var →
-  `cache\PalworldSaveTools` in this repo → old `tools\`-sibling layout →
-  `F:\Workspace\palworld\tools\paldex_import\cache\PalworldSaveTools`
-  (machine-specific fallback to the original repo's cache).
-- On Linux, build palooz first (`pip install
-  <fork>/src/palsav/palooz`) and/or point `EFFIGY_FORK_DIR` at a fork
-  checkout with a working palooz.
+3. Compare the `Hash` value it prints with the SHA256 shown on the
+   official release page. **Every character must match** (upper/lower
+   case doesn't matter).
+4. Match → your download is genuine. No match → delete the file and
+   download again from the official repository only.
 
-## GUI (primary)
+---
 
-```powershell
-python grant_gui.py [save_dir]     # or PalworldEffigyTool.exe
-```
+## Quick start
 
-Minimal tkinter window over the shared modules: Browse to the save folder
-(opens at `%LOCALAPPDATA%\Pal\Saved\SaveGames` when the path box is empty) →
-pick a player (listed by in-game name when `Level.sav` is present, decoded
-automatically in ~0.1s; UID fallback otherwise) → tick categories (each
-shows collected/total) → **Grant N NEW**. The ? buttons open an in-app help
-page (usage, finding your save, safety/undo). Confirmation dialog shows the
-per-category dry run; backup + post-write verification + auto-restore
-behave exactly like the CLI, which also lists players by name.
+1. **Close Palworld completely.** The game rewrites its save continuously;
+   editing a save that's in use will lose your changes.
+2. Run **`PalworldEffigyTool.exe`** and click **Browse…** — it opens right
+   at the Windows save location (`%LOCALAPPDATA%\Pal\Saved\SaveGames`).
+   Go into your Steam-ID folder and select your world folder (the
+   32-character name). **Select the folder that contains `Players`, not any
+   of the files inside.**
+   Stuck? The **?** buttons in the app open a help page that covers where
+   saves live and what to do if yours isn't there.
+3. Click your player (shown by in-game name, e.g. `Alice  (1A2B3C4D)`),
+   tick the effigy categories to grant (each row shows `collected/total`),
+   or **All**.
+4. Click **Grant N NEW**. You'll get a confirmation with a per-category
+   breakdown before anything is written.
+5. Start the game — the effigies are waiting as unspent points at the
+   Statue of Power.
 
-## CLI (advanced)
+## Safety / undo
 
-```powershell
-python grant_cli.py <save_dir> [--master PATH] [--no-union]
-```
+- Before writing, the tool always saves a backup next to the original:
+  `<uid>.sav.bak-<date>-<time>`. To undo, copy that file back over the
+  edited one (game closed).
+- After writing, the tool re-opens the file it just wrote and verifies
+  every granted effigy and balance. If anything doesn't match, it restores
+  the backup automatically and tells you.
+- Nothing but the selected `Players/<uid>.sav` is ever modified.
+  `Level.sav` is only read (for names), never written.
 
-Same grant flow as a step-by-step text menu: player pick → category pick
-(`1,3-5` or `all`) → dry-run summary → type `YES` → write. It always
-creates a timestamped `.bak-*` beside the file first, then re-decodes what
-it wrote and verifies every flag and balance; on any mismatch it restores
-the backup and exits 1.
+## What the categories are
 
-## Standalone exe (PyInstaller)
-
-`dist\PalworldEffigyTool.exe` is the single distribution build — a windowed
-GUI with palsav, the palooz Oodle extension, and `relic_master.json`
-bundled, so it runs on any 64-bit Windows box with no Python and no repo
-checkout:
-
-```powershell
-PalworldEffigyTool.exe [save_dir]      # windowed GUI; optional pre-filled folder
-python grant_cli.py <save_dir>         # console workflow needs a source checkout
-```
-
-Rebuild (from repo root; requires PyInstaller and the cached fork):
-
-```powershell
-python -m PyInstaller --distpath dist --workpath build --noconfirm build\palworld-effigy-tool.spec
-```
-
-**Releasing:** any change to the exe means a new SHA-256 — follow the
-checklist in [`RELEASING.md`](RELEASING.md) (rebuild → hash the final
-binary → publish the hash in the release notes → round-trip verify).
-
-`build/` and `dist/` are gitignored (the exe stays local). Benign analysis
-warnings: `palworld_aio` (unused palsav backup command) and `recordclass`
-(optional palsav fallback, not installed in the tested env either).
-
-## Dedicated-server workflow (advanced — not the primary use case)
-
-The game autosaves continuously — never edit a save the server is using,
-and keep the target player OFFLINE for the whole procedure (their in-memory
-state would overwrite the edit).
-
-```powershell
-# 1. stop the Palworld server (e.g. systemctl on a Linux host)
-ssh <user>@<server> "sudo systemctl stop <palworld-service>"
-
-# 2. copy the world save folder down
-scp -r <user>@<server>:<save-root>/Saved/SaveGames/0/<world-id> .\work-save
-
-# 3. run the tool
-python grant_cli.py .\work-save
-
-# 4. copy ONLY the edited player file back (the tool prints which)
-scp .\work-save\Players\<uid>.sav <user>@<server>:<save-root>/Saved/SaveGames/0/<world-id>/Players/
-
-# 5. start the server
-ssh <user>@<server> "sudo systemctl start <palworld-service>"
-```
-
-To undo, copy the `.bak-*` file back the same way.
-
-## Layout
-
-| File | Responsibility |
+| Effigy | Boost |
 |---|---|
-| `grant_cli.py` | interactive menu, dry-run, confirm, self-verify orchestration |
-| `grant_edits.py` | pure GVAS-dict edit logic (no palsav import) |
-| `grant_master.py` | vendored master list + observed-GUID union |
-| `grant_savio.py` | PlM decode/encode via the cached fork, backup/restore |
-| `relic_master.json` | vendored GUID master (405, provenance in header) |
+| Lifmunk Effigy | Capture Power |
+| Lamball Effigy | Satiety Duration |
+| Pengullet Effigy | Swimming |
+| Munchill Effigy | Food Preservation |
+| Rooby Effigy | Jump Power |
+| Herbil Effigy | Gliding |
+| Tanzee Effigy | Climb Speed |
+| Depresso Effigy | Status Resistance |
+| Cattiva Effigy | Mounted Stamina |
+| Lunaris Effigy | Sphere Tracking |
+| Relaxaurus Effigy | EXP Gain |
+| Yakumo Effigy | Wild Pal Passives |
 
-Tests: `tests/test_effigy_grant_*.py` live in the original palworld repo
-(`F:\Workspace\palworld`) — not yet migrated here. Save-dependent ones
-auto-skip without `savedata/`; set `EFFIGY_SLOW_TESTS=1` to include the
-Level.sav name test.
+Granted effigies land as **unspent** points — the player still visits a
+Statue of Power to spend them, same as normal pickups.
+
+## Good to know
+
+- The tool knows every placed effigy in the game (405 of them) and also
+  scans the other player files in the folder for any effigy the game data
+  list misses — so "all" really means all.
+- Running it again on the same player is harmless: it reports
+  "nothing to grant" and writes nothing.
+- Files ending in `_dps.sav` are ignored (they're not player saves).
+- If `Level.sav` is missing or unreadable, everything still works — players
+  are just listed by their UID instead of name.
+
+## Advanced: dedicated servers & console
+
+Not the focus of this tool, but it works on dedicated-server world saves
+too: stop the server, copy the world folder to your PC (on a typical Linux
+server it's `.../Pal/Saved/SaveGames/0/<32-character-world-id>/`), edit it
+here, copy only the **edited** `Players/<uid>.sav` back, then start the
+server. The player being edited must stay logged out the whole time —
+their in-game state would overwrite the edit.
+
+There is also a step-by-step console version for scripted use, run from a
+source checkout: `python grant_cli.py <save_folder>`.
 
 ---
 

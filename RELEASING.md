@@ -1,4 +1,7 @@
-# Release Process v1.0
+# Release Process v1.1
+
+*(v1.1: file renames — `README.md` is now the player-facing help and ships
+as a release asset; developer notes/version history live in `history.md`.)*
 
 Follow this checklist for **every release**. The iron rule: **any change
 that affects `PalworldEffigyTool.exe` produces a new binary and therefore a
@@ -10,11 +13,11 @@ build; never hash before the final rebuild.
 
 - **Code changed** (`grant_*.py`, the spec, bundled `relic_master.json`):
   the exe changes → full checklist below, new release.
-- **Docs-only change** (`README.md`, `RELEASING.md`, post drafts): commit
-  and push, no release needed. Exception: `EFFIGY_README.md` ships as a
-  release asset — if it changes materially, re-upload it to the current
-  release (`gh release upload <tag> dist\EFFIGY_README.md --clobber`);
-  the exe hash is unaffected.
+- **Docs-only change** (`history.md`, `RELEASING.md`, post drafts): commit
+  and push, no release needed. Exception: `README.md` (the player-facing
+  help) ships as a release asset — if it changes materially, re-upload it
+  to the current release (`gh release upload <tag> dist\README.md
+  --clobber`); the exe hash is unaffected.
 
 ## Checklist (exe changed)
 
@@ -24,8 +27,8 @@ invalidates the published value).
 
 1. **Finish all code/help changes first.** Remember: in-app Help text
    lives in `grant_gui.py` — editing it changes the exe.
-2. **Bump versions** in every modified file's header + `README.md` title,
-   with changelog lines.
+2. **Bump versions** in every modified file's header + the `history.md`
+   title, with changelog lines.
 3. **Smoke test** (imports + scripted GUI checks; see summarylog for
    examples).
 4. **Rebuild** from the spec (never ad-hoc PyInstaller flags):
@@ -33,17 +36,17 @@ invalidates the published value).
    python -m PyInstaller --distpath dist --workpath build --noconfirm build\palworld-effigy-tool.spec
    ```
    Check `$LASTEXITCODE` is 0 and review `build\palworld-effigy-tool\warn-*.txt`
-   for NEW warnings (known-benign set is documented in README.md).
-5. **Sync the player readme**: `Copy-Item EFFIGY_README.md dist\ -Force`.
+   for NEW warnings (known-benign set is documented in `history.md`).
+5. **Sync the player help**: `Copy-Item README.md dist\ -Force`.
 6. **Hash the final exe** (only now — after the last rebuild):
    ```powershell
    (Get-FileHash dist\PalworldEffigyTool.exe -Algorithm SHA256).Hash
    ```
 7. **Commit and push** all source/doc changes.
-8. **Create the release** — tag matches the README version at release
-   time (e.g. `v1.12`):
+8. **Create the release** — tag matches the `history.md` version at
+   release time (e.g. `v1.12`):
    ```powershell
-   gh release create v<X.Y> dist\PalworldEffigyTool.exe dist\EFFIGY_README.md --title "Palworld Effigy Tool v<X.Y>" --notes "<use template below>"
+   gh release create v<X.Y> dist\PalworldEffigyTool.exe dist\README.md --title "Palworld Effigy Tool v<X.Y>" --notes "<use template below>"
    ```
    If replacing an unannounced release, delete it first:
    `gh release delete v<old> --cleanup-tag --yes`. Once a release has been
