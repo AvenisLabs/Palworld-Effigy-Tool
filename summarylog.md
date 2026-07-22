@@ -1,5 +1,10 @@
 # Summary Log
 
+## 2026-07-22 06:12 — Cattiva app icon (release v1.17)
+- Sourced `cattiva_pleading.webp` (128×128) from the palworld-save-pal cache in the old repo; converted to multi-size `assets\cattiva.ico` (16–128) with Pillow, padded square.
+- `grant_gui.py` v1.10: `_resource()` helper (assets\ in source, `sys._MEIPASS` frozen); `iconbitmap(default=…)` so the Help Toplevel inherits it. Spec v1.2: `icon=` on EXE + ico in `datas`.
+- history.md v1.17. RELEASING.md flow: smoke test → rebuild (exit 0, 14 benign warns) → hash: 326DFF7D48AA62573690EB830D2AAB035C43F7839702295459CF7ED05606BF94 → release v1.17 → round-trip verify.
+
 ## 2026-07-22 06:00 — Doc restructure: helpfile is now the GitHub README
 - `git mv`: old dev `README.md` → `history.md` (v1.16, keeps the version log + dev docs); player helpfile `EFFIGY_README.md` → `README.md` (now the GitHub landing page).
 - References updated: `RELEASING.md` v1.1 (asset name, sync step, version-bump target now history.md), `CLAUDE.md`, history.md warning block. Old summarylog entries left as historical record.

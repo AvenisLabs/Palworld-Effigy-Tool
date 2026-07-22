@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""grant_gui.py v1.9 — minimal tkinter GUI for the effigy grant tool.
+"""grant_gui.py v1.10 — minimal tkinter GUI for the effigy grant tool.
+
+v1.10: Cattiva app icon — window/taskbar icon set from bundled
+       cattiva.ico (assets\\ in source runs, _MEIPASS in the frozen exe).
 
 v1.9: launch-notice text reflows naturally (one string per paragraph — the
       hard-wrapped version fought the dialog's own wrapping); Help window
@@ -51,6 +54,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))  # dual-mode contract
 import grant_edits as ge
 import grant_master as gm
 import grant_savio as sio
+
+
+def _resource(name: str) -> Path:
+    """Bundled-data path: PyInstaller extracts datas to sys._MEIPASS; source
+    runs read from the repo's assets\\ folder."""
+    if hasattr(sys, "_MEIPASS"):
+        return Path(sys._MEIPASS) / name
+    return Path(__file__).resolve().parent / "assets" / name
 
 
 def default_save_root() -> Path | None:
@@ -199,6 +210,9 @@ class App:
     def __init__(self, root: tk.Tk):
         self.root = root
         root.title("Effigy Grant Tool — © 2026 AvenisLabs for KarasWorlds.com")
+        ico = _resource("cattiva.ico")
+        if ico.is_file():  # default= also applies to Toplevels (Help window)
+            root.iconbitmap(default=str(ico))
         root.geometry("640x560")
         self.saves: list[Path] = []
         self.names: dict[str, str] = {}
