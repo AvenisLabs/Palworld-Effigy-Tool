@@ -1,5 +1,7 @@
-# Effigy Grant Tool v1.13
+# Effigy Grant Tool v1.14
 
+> v1.14: GUI shows an official-source notice popup on every launch,
+> acknowledged with OK before the main window opens.
 > v1.13: release process documented in `RELEASING.md` (docs only — exe,
 > hash, and release v1.12 unchanged).
 

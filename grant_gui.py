@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""grant_gui.py v1.7 — minimal tkinter GUI for the effigy grant tool.
+"""grant_gui.py v1.8 — minimal tkinter GUI for the effigy grant tool.
+
+v1.8: official-source notice popup on launch — must be acknowledged (OK)
+      before the main window opens.
 
 v1.7: official-source help section now includes step-by-step SHA-256
       verification instructions (Get-FileHash vs the release-page hash).
@@ -57,6 +60,23 @@ def default_save_root() -> Path | None:
         return None
     root = Path(local) / "Pal" / "Saved" / "SaveGames"
     return root if root.is_dir() else None
+
+
+# Shown as a modal popup on every launch, before the main window opens.
+OFFICIAL_SOURCE_NOTICE = """\
+The ONLY official source for this tool is the public open-source
+GitHub repository:
+
+github.com/AvenisLabs/Palworld-Effigy-Tool
+
+It is NOT distributed anywhere else. If you downloaded it from anywhere
+other than that repository's Releases page, it could be COMPROMISED \
+(tampered with or bundled with malware) — delete it and download a fresh
+copy from the official repository.
+
+You can verify your download's SHA-256 checksum against the one published
+on the release page: see  ? Help -> Official source  for step-by-step
+instructions."""
 
 
 # (section title, body) pairs — rendered into the Help window; section titles
@@ -451,7 +471,13 @@ class App:
 
 def main() -> int:
     root = tk.Tk()
+    # Official-source notice must be acknowledged before the main window
+    # opens: keep the root hidden until OK is clicked.
+    root.withdraw()
+    messagebox.showinfo("Official Source Notice", OFFICIAL_SOURCE_NOTICE,
+                        parent=root)
     app = App(root)
+    root.deiconify()
     if len(sys.argv) > 1:  # optional: launch with a folder pre-filled
         app.dir_var.set(sys.argv[1])
         app.load_dir()
