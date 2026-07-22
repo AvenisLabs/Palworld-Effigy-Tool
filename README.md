@@ -1,4 +1,8 @@
-# Effigy Grant Tool v1.7
+# Effigy Grant Tool v1.8
+
+> v1.8: single-player focus (done dialog no longer mentions copying back to
+> a server); © 2026 AvenisLabs branding in title bar, code headers, and an
+> About help section with site links.
 
 > v1.7: single-exe distribution — one windowed `PalworldEffigyTool.exe`
 > (GUI) replaces the separate console + GUI exes; the CLI remains available
@@ -141,3 +145,8 @@ Tests: `tests/test_effigy_grant_*.py` live in the original palworld repo
 (`F:\Workspace\palworld`) — not yet migrated here. Save-dependent ones
 auto-skip without `savedata/`; set `EFFIGY_SLOW_TESTS=1` to include the
 Level.sav name test.
+
+---
+
+© 2026 [AvenisLabs](https://avenislabs.com) · built for
+[KarasWorlds.com](https://karasworlds.com). All rights reserved.

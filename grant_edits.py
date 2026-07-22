@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
-"""grant_edits.py v1.1 — pure GVAS-dict edit logic for the effigy grant tool.
+"""grant_edits.py v1.2 — pure GVAS-dict edit logic for the effigy grant tool.
 
+Copyright © 2026 AvenisLabs (https://avenislabs.com)
+for KarasWorlds.com (https://karasworlds.com). All rights reserved.
+
+v1.2: copyright notice added.
 v1.1: sanitized — server-specific references removed from docs.
 
 Pure functions over already-decoded GVAS dicts, no palsav import,

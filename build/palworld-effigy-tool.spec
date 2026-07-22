@@ -1,6 +1,8 @@
 # -*- mode: python ; coding: utf-8 -*-
 # Single-exe distribution build: windowed GUI (grant_gui) with palsav, the
-# palooz Oodle extension, and relic_master.json bundled. v1.0
+# palooz Oodle extension, and relic_master.json bundled. v1.1
+# Copyright © 2026 AvenisLabs (https://avenislabs.com)
+# for KarasWorlds.com (https://karasworlds.com). All rights reserved.
 
 a = Analysis(
     ['..\\grant_gui.py'],

@@ -1,5 +1,12 @@
 # Summary Log
 
+## 2026-07-22 04:35 — Branding + single-player polish
+- `grant_gui.py` v1.4: done dialog no longer tells players to copy the file back to a server (single-player focus; server guidance stays in Help/readme); title bar now "Effigy Grant Tool — © 2026 AvenisLabs for KarasWorlds.com"; new About help section with links to avenislabs.com and karasworlds.com.
+- Copyright headers added to all code files: grant_cli v1.4, grant_edits v1.2, grant_master v1.2, grant_savio v1.6, spec v1.1.
+- `README.md` v1.8 and `EFFIGY_README.md`: © footer with links to both sites; synced to `dist\`.
+- Rebuild was blocked by a running exe instance (user launched it); paused per locked-file rule, user approved close — instance was already gone, rebuilt clean (exit 0).
+- Verified: scripted smoke test (title, About links, no copy-back text) + rebuilt exe window title confirmed live.
+
 ## 2026-07-22 04:22 — Single-exe distribution
 - New `build\palworld-effigy-tool.spec` (v1.0): one windowed `PalworldEffigyTool.exe` (11.7 MB) replaces the separate console + GUI exes; CLI remains available from source (`python grant_cli.py`). Rationale: Windows PEs are console- or windowed-subsystem at link time; dual-mode hacks break the CLI's interactive stdin.
 - Deleted old specs/exes and stale build dirs; `dist\` now holds only the exe + readme.

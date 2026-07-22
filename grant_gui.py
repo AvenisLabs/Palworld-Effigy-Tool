@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
-"""grant_gui.py v1.3 — minimal tkinter GUI for the effigy grant tool.
+"""grant_gui.py v1.4 — minimal tkinter GUI for the effigy grant tool.
 
+Copyright © 2026 AvenisLabs (https://avenislabs.com)
+for KarasWorlds.com (https://karasworlds.com). All rights reserved.
+
+v1.4: single-player focus — done dialog no longer tells players to copy the
+      file back to a server (that guidance lives in Help / the readme);
+      © notice in the title bar; About section (with site links) in Help.
 v1.3: Browse now opens at %LOCALAPPDATA%\\Pal\\Saved\\SaveGames (the default
       Windows save location) when the path box is empty; added ? help buttons
       and a Help page (usage, finding your save, folder-not-files, safety).
@@ -94,6 +100,10 @@ directly contains "Players"."""),
   read (for player names).
 - The player being edited must not be in the game while you edit — their
   live state would overwrite the change."""),
+    ("About", """\
+Effigy Grant Tool
+© 2026 AvenisLabs — https://avenislabs.com
+Built for KarasWorlds.com — https://karasworlds.com"""),
 ]
 
 
@@ -113,7 +123,7 @@ def dry_run_lines(types_meta: dict, sets: dict, already: dict,
 class App:
     def __init__(self, root: tk.Tk):
         self.root = root
-        root.title("Effigy Grant Tool")
+        root.title("Effigy Grant Tool — © 2026 AvenisLabs for KarasWorlds.com")
         root.geometry("640x560")
         self.saves: list[Path] = []
         self.names: dict[str, str] = {}
@@ -383,8 +393,7 @@ class App:
         self.log(f"OK: wrote {target.name}, verified {total} new effigies")
         messagebox.showinfo(
             "Effigy Grant",
-            f"Done — {total} effigies granted and verified.\n\n"
-            "Copy the file back with the server STOPPED.")
+            f"Done — {total} effigies granted and verified.")
         # Refresh state so a second grant shows correct counts.
         self.pick_player()
 

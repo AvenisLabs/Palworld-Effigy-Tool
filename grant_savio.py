@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
-"""grant_savio.py v1.5 — PlM save decode/encode for the effigy grant tool.
+"""grant_savio.py v1.6 — PlM save decode/encode for the effigy grant tool.
 
+Copyright © 2026 AvenisLabs (https://avenislabs.com)
+for KarasWorlds.com (https://karasworlds.com). All rights reserved.
+
+v1.6: copyright notice added.
 v1.5: relocation-aware fork lookup — the tool now lives in its own repo
       (F:/Workspace/Palworld_effigy), so the fork is probed at: EFFIGY_FORK_DIR,
       a repo-local cache/PalworldSaveTools, the old tools/-sibling layout, then

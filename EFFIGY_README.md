@@ -90,3 +90,8 @@ Statue of Power to spend them, same as normal pickups.
 - Files ending in `_dps.sav` are ignored (they're not player saves).
 - If `Level.sav` is missing or unreadable, everything still works — players
   are just listed by their UID instead of name.
+
+---
+
+© 2026 [AvenisLabs](https://avenislabs.com) · built for
+[KarasWorlds.com](https://karasworlds.com). All rights reserved.

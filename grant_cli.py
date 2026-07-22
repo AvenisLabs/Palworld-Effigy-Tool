@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
-"""grant_cli.py v1.3 — interactive effigy grant tool for Palworld player saves.
+"""grant_cli.py v1.4 — interactive effigy grant tool for Palworld player saves.
 
+Copyright © 2026 AvenisLabs (https://avenislabs.com)
+for KarasWorlds.com (https://karasworlds.com). All rights reserved.
+
+v1.4: copyright notice added.
 v1.3: sanitized — server-specific references removed from docs and output.
 v1.2: docs — tool moved to its own repo root (was tools/effigy_grant/).
 v1.1: player names load automatically when Level.sav is present (fast since

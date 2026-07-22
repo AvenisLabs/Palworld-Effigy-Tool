@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
-"""grant_master.py v1.1 — grant-source GUID sets for the effigy grant tool.
+"""grant_master.py v1.2 — grant-source GUID sets for the effigy grant tool.
 
+Copyright © 2026 AvenisLabs (https://avenislabs.com)
+for KarasWorlds.com (https://karasworlds.com). All rights reserved.
+
+v1.2: copyright notice added.
 v1.1: sanitized — server-specific references removed from docs.
 
 Vendored relic_master.json (405 GUIDs, derived from palworld-save-pal's relic
