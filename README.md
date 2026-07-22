@@ -132,6 +132,10 @@ Rebuild (from repo root; requires PyInstaller and the cached fork):
 python -m PyInstaller --distpath dist --workpath build --noconfirm build\palworld-effigy-tool.spec
 ```
 
+**Releasing:** any change to the exe means a new SHA-256 — follow the
+checklist in [`RELEASING.md`](RELEASING.md) (rebuild → hash the final
+binary → publish the hash in the release notes → round-trip verify).
+
 `build/` and `dist/` are gitignored (the exe stays local). Benign analysis
 warnings: `palworld_aio` (unused palsav backup command) and `recordclass`
 (optional palsav fallback, not installed in the tested env either).

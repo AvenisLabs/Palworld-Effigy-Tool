@@ -1,5 +1,11 @@
 # Summary Log
 
+## 2026-07-22 05:30 — Release process documented
+- New `RELEASING.md` (v1.0): full checklist — code first, rebuild from spec, hash the FINAL exe, publish hash in release notes (only trusted channel), round-trip verify the uploaded asset; when releases are/aren't needed; notes template rules; announced releases never deleted.
+- New project `CLAUDE.md`: points future sessions at RELEASING.md; iron rule that in-app Help text lives in grant_gui.py so help edits change the exe hash.
+- `README.md`: Releasing pointer added to the exe section. Saved process to persistent memory.
+- No code change — exe/hash/release v1.12 unchanged.
+
 ## 2026-07-22 05:22 — SHA-256 verification
 - Hash published in release notes only (the trusted source — files shipping beside the exe can be tampered with too); readmes + in-app help teach HOW to verify.
 - `grant_gui.py` v1.7: verification walk-through in the official-source help section; exe rebuilt AFTER the help change, then hashed: FF20C8B8F1F57675B8D0EEF0D94583798201E6F423F404300A823C19F2A89400.
