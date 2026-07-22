@@ -18,3 +18,8 @@ save/
 # Promo drafts — local only, scrubbed from history 2026-07-22
 steam_post.txt
 reddit_post.md
+
+# Local-only data/logs (untracked 2026-07-22; still bundled into the exe
+# via the spec — a source checkout needs a local relic_master.json to build)
+relic_master.json
+summarylog.md
