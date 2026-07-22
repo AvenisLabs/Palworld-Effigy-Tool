@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""grant_gui.py v1.11 — minimal tkinter GUI for the effigy grant tool.
+"""grant_gui.py v1.13 — minimal tkinter GUI for the effigy grant tool.
+
+v1.13: top row simplified — Load button and its ? removed (Browse loads
+       automatically; pressing Enter in the path box loads a hand-typed
+       path).
+v1.12: layout — Grant button moved into the Categories button row, left of
+       All/None, which are now fixed-width instead of half the row each.
 
 v1.11: Help window widened to 740px — the monospace body text is
        hard-wrapped at ~74 columns and the old 620px width soft-wrapped
@@ -231,13 +237,10 @@ class App:
         top = ttk.Frame(root, padding=6)
         top.pack(fill="x")
         self.dir_var = tk.StringVar()
-        ttk.Entry(top, textvariable=self.dir_var).pack(side="left", fill="x",
-                                                       expand=True)
-        ttk.Button(top, text="Browse…", command=self.browse).pack(side="left", padx=4)
-        ttk.Button(top, text="Load", command=self.load_dir).pack(side="left")
-        # Context help: jumps straight to the save-locating section.
-        ttk.Button(top, text="?", width=2,
-                   command=lambda: self.show_help("Finding your save")).pack(
+        entry = ttk.Entry(top, textvariable=self.dir_var)
+        entry.pack(side="left", fill="x", expand=True)
+        entry.bind("<Return>", lambda e: self.load_dir())  # hand-typed paths
+        ttk.Button(top, text="Browse…", command=self.browse).pack(
             side="left", padx=(4, 0))
 
         mid = ttk.Frame(root, padding=6)
@@ -254,17 +257,18 @@ class App:
         self.cat_frame.pack(fill="both", expand=True)
         btns = ttk.Frame(right)
         btns.pack(fill="x")
-        ttk.Button(btns, text="All", command=lambda: self.set_all(True)).pack(
-            side="left", expand=True, fill="x")
-        ttk.Button(btns, text="None", command=lambda: self.set_all(False)).pack(
-            side="left", expand=True, fill="x")
+        # Grant takes the leftover row width; All/None are compact.
+        self.grant_btn = ttk.Button(btns, text="Grant", command=self.grant,
+                                    state="disabled")
+        self.grant_btn.pack(side="left", expand=True, fill="x")
+        ttk.Button(btns, text="All", width=5,
+                   command=lambda: self.set_all(True)).pack(side="left", padx=(4, 0))
+        ttk.Button(btns, text="None", width=5,
+                   command=lambda: self.set_all(False)).pack(side="left", padx=(4, 0))
 
         bottom = ttk.Frame(root, padding=6)
         bottom.pack(fill="x")
         ttk.Button(bottom, text="? Help", command=self.show_help).pack(side="left")
-        self.grant_btn = ttk.Button(bottom, text="Grant", command=self.grant,
-                                    state="disabled")
-        self.grant_btn.pack(side="right")
         self.help_win: tk.Toplevel | None = None  # reused if already open
         self.status = tk.Text(root, height=8, state="disabled")
         self.status.pack(fill="x", padx=6, pady=(0, 6))

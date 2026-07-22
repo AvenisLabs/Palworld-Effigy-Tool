@@ -1,5 +1,9 @@
 # Summary Log
 
+## 2026-07-22 06:40 — UI polish (release v1.19)
+- `grant_gui.py` v1.12–v1.13 (user-tested before commit): Grant moved into Categories row left of compact fixed-width All/None; Load button + its ? removed (Browse auto-loads; Enter in path box loads typed paths); bottom bar is just ? Help.
+- history.md v1.19. Exe rebuilt during testing; hash: 71CEB2B19A2FCBA2B2DDF06FB44DA282447B79EC40980D84B7B16814E10DBD31 → release v1.19 → round-trip verify.
+
 ## 2026-07-22 06:24 — Help width fix; icon cache (release v1.18)
 - Explorer python-icon report: verified via ExtractAssociatedIcon that the exe's embedded resource IS Cattiva — stale Explorer icon cache; requested refresh with `ie4uinit -show`.
 - `grant_gui.py` v1.11: Help window 620→740px; smoke test measures actual font width and asserts longest help line (76 chars) fits (87 fit) — no more soft-wrap raggedness.
