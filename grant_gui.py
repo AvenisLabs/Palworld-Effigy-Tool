@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""grant_gui.py v1.8 — minimal tkinter GUI for the effigy grant tool.
+"""grant_gui.py v1.9 — minimal tkinter GUI for the effigy grant tool.
+
+v1.9: launch-notice text reflows naturally (one string per paragraph — the
+      hard-wrapped version fought the dialog's own wrapping); Help window
+      now opens automatically beside the main window on startup, at the top.
 
 v1.8: official-source notice popup on launch — must be acknowledged (OK)
       before the main window opens.
@@ -63,20 +67,20 @@ def default_save_root() -> Path | None:
 
 
 # Shown as a modal popup on every launch, before the main window opens.
-OFFICIAL_SOURCE_NOTICE = """\
-The ONLY official source for this tool is the public open-source
-GitHub repository:
-
-github.com/AvenisLabs/Palworld-Effigy-Tool
-
-It is NOT distributed anywhere else. If you downloaded it from anywhere
-other than that repository's Releases page, it could be COMPROMISED \
-(tampered with or bundled with malware) — delete it and download a fresh
-copy from the official repository.
-
-You can verify your download's SHA-256 checksum against the one published
-on the release page: see  ? Help -> Official source  for step-by-step
-instructions."""
+# Each paragraph is ONE string — the dialog does its own word-wrapping, and
+# embedded newlines mid-sentence produce ragged breaks.
+OFFICIAL_SOURCE_NOTICE = (
+    "The ONLY official source for this tool is the public open-source "
+    "GitHub repository:"
+    "\n\ngithub.com/AvenisLabs/Palworld-Effigy-Tool\n\n"
+    "It is NOT distributed anywhere else. If you downloaded it from "
+    "anywhere other than that repository's Releases page, it could be "
+    "COMPROMISED (tampered with or bundled with malware) — delete it and "
+    "download a fresh copy from the official repository."
+    "\n\n"
+    "You can verify your download's SHA-256 checksum against the one "
+    "published on the release page: see \"? Help → Official source\" for "
+    "step-by-step instructions.")
 
 
 # (section title, body) pairs — rendered into the Help window; section titles
@@ -478,6 +482,14 @@ def main() -> int:
                         parent=root)
     app = App(root)
     root.deiconify()
+    # Open Help beside the main window on startup, scrolled to the top.
+    root.update_idletasks()  # realize geometry so winfo_* is accurate
+    app.show_help()
+    app.help_text.yview_moveto(0.0)
+    app.help_win.geometry(
+        f"+{root.winfo_x() + root.winfo_width() + 12}+{root.winfo_y()}")
+    root.lift()
+    root.focus_force()  # keep keyboard focus on the main window
     if len(sys.argv) > 1:  # optional: launch with a folder pre-filled
         app.dir_var.set(sys.argv[1])
         app.load_dir()

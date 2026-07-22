@@ -1,5 +1,7 @@
-# Effigy Grant Tool v1.14
+# Effigy Grant Tool v1.15
 
+> v1.15: launch-notice text reflows cleanly; Help opens automatically
+> beside the main window on startup (top of the page).
 > v1.14: GUI shows an official-source notice popup on every launch,
 > acknowledged with OK before the main window opens.
 > v1.13: release process documented in `RELEASING.md` (docs only — exe,

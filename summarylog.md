@@ -1,5 +1,9 @@
 # Summary Log
 
+## 2026-07-22 05:50 — Notice reflow fix + startup Help (release v1.15)
+- `grant_gui.py` v1.9: notice paragraphs are single strings so the dialog wraps them itself (ragged mid-sentence breaks fixed, per user screenshot); Help window now auto-opens beside the main window on startup (offset +12px right, same y), scrolled to top, keyboard focus kept on main window.
+- `README.md` v1.15. RELEASING.md followed: smoke test (paragraph reflow assertion + full main() flow) → rebuild (exit 0, same 14 benign warns) → hash: D1DF2BA884A8343DC73F26742CB90F852364F809E9F9CC4F5087E8A1921FB39E → release v1.15 → round-trip verify.
+
 ## 2026-07-22 05:40 — Launch notice popup (release v1.14)
 - `grant_gui.py` v1.8: modal "Official Source Notice" popup on every launch (root withdrawn until OK) — repo-only distribution, compromised-copy warning, pointer to Help for SHA-256 verification. Smoke-tested via patched messagebox/mainloop.
 - `README.md` v1.14. Followed RELEASING.md: rebuild from spec (exit 0, same benign warnings) → hashed FINAL exe: 2A4B5F3B85F4E22EA86B65FA62911C628B6DF3BE78B162849585752D194BA7DF → release v1.14 (v1.12 deleted, unannounced) → round-trip verify.
