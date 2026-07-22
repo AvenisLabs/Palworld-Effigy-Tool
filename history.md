@@ -1,8 +1,10 @@
-# Effigy Grant Tool v1.19 — developer notes & version history
+# Effigy Grant Tool v1.20 — developer notes & version history
 
 *(formerly `README.md` — the repo's `README.md` is now the player-facing
 help; this file keeps the developer documentation and version history.)*
 
+> v1.20: Bugs/support section in README + in-app Help — contact Kara on
+> Discord (invite link at karasworlds.com).
 > v1.19: UI polish — Grant button moved into the Categories row left of
 > compact All/None; Load button and its ? removed (Browse auto-loads,
 > Enter in the path box loads hand-typed paths).

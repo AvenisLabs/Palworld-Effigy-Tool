@@ -138,6 +138,15 @@ their in-game state would overwrite the edit.
 There is also a step-by-step console version for scripted use, run from a
 source checkout: `python grant_cli.py <save_folder>`.
 
+## Bugs / support
+
+Found a bug or having a problem with the tool? **Contact Kara on
+Discord** — the invite link is at [karasworlds.com](https://karasworlds.com).
+
+When reporting, it helps to include: what you clicked, what the tool said
+(the log box at the bottom of the main window), and whether your save is
+single-player or from a dedicated server.
+
 ---
 
 © 2026 [AvenisLabs](https://avenislabs.com) · built for

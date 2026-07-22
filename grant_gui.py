@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""grant_gui.py v1.13 — minimal tkinter GUI for the effigy grant tool.
+"""grant_gui.py v1.14 — minimal tkinter GUI for the effigy grant tool.
+
+v1.14: Help gains a "Bugs / support" section — contact Kara on Discord
+       (link at karasworlds.com).
 
 v1.13: top row simplified — Load button and its ? removed (Browse loads
        automatically; pressing Enter in the path box loads a hand-typed
@@ -195,6 +198,13 @@ fingerprint that changes if the file is altered in any way.
    matter).
 4. Match = genuine download. No match = delete the file and download
    again from the official repository only."""),
+    ("Bugs / support", """\
+Found a bug or having a problem with the tool? Contact Kara on Discord —
+the invite link is at https://karasworlds.com.
+
+When reporting, it helps to include: what you clicked, what the tool said
+(the log box at the bottom of the main window), and whether your save is
+single-player or from a dedicated server."""),
     ("About", """\
 Effigy Grant Tool
 © 2026 AvenisLabs — https://avenislabs.com
