@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""grant_gui.py v1.10 — minimal tkinter GUI for the effigy grant tool.
+"""grant_gui.py v1.11 — minimal tkinter GUI for the effigy grant tool.
+
+v1.11: Help window widened to 740px — the monospace body text is
+       hard-wrapped at ~74 columns and the old 620px width soft-wrapped
+       the last word of many lines (ragged display).
 
 v1.10: Cattiva app icon — window/taskbar icon set from bundled
        cattiva.ico (assets\\ in source runs, _MEIPASS in the frozen exe).
@@ -290,7 +294,7 @@ class App:
         if self.help_win is None or not self.help_win.winfo_exists():
             self.help_win = tk.Toplevel(self.root)
             self.help_win.title("Effigy Grant — Help")
-            self.help_win.geometry("620x520")
+            self.help_win.geometry("740x540")
             txt = tk.Text(self.help_win, wrap="word", padx=10, pady=8)
             sb = ttk.Scrollbar(self.help_win, command=txt.yview)
             txt.configure(yscrollcommand=sb.set)

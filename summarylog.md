@@ -1,5 +1,10 @@
 # Summary Log
 
+## 2026-07-22 06:24 — Help width fix; icon cache (release v1.18)
+- Explorer python-icon report: verified via ExtractAssociatedIcon that the exe's embedded resource IS Cattiva — stale Explorer icon cache; requested refresh with `ie4uinit -show`.
+- `grant_gui.py` v1.11: Help window 620→740px; smoke test measures actual font width and asserts longest help line (76 chars) fits (87 fit) — no more soft-wrap raggedness.
+- history.md v1.18. Rebuild (exit 0) → hash: 217C6288A090C74C49540481C3F4353A3ECBF8E6AE5564D04AF15811BE4215F5 → release v1.18 → round-trip verify.
+
 ## 2026-07-22 06:12 — Cattiva app icon (release v1.17)
 - Sourced `cattiva_pleading.webp` (128×128) from the palworld-save-pal cache in the old repo; converted to multi-size `assets\cattiva.ico` (16–128) with Pillow, padded square.
 - `grant_gui.py` v1.10: `_resource()` helper (assets\ in source, `sys._MEIPASS` frozen); `iconbitmap(default=…)` so the Help Toplevel inherits it. Spec v1.2: `icon=` on EXE + ico in `datas`.

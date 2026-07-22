@@ -1,8 +1,10 @@
-# Effigy Grant Tool v1.17 — developer notes & version history
+# Effigy Grant Tool v1.18 — developer notes & version history
 
 *(formerly `README.md` — the repo's `README.md` is now the player-facing
 help; this file keeps the developer documentation and version history.)*
 
+> v1.18: Help window widened to 740px so the ~74-column monospace body
+> never soft-wraps (verified: longest line 76 chars, 87 fit).
 > v1.17: Cattiva app icon (exe + window/taskbar + Help window) from
 > `assets\cattiva.ico`, bundled into the exe.
 > v1.16: doc restructure — player helpfile is now `README.md` (the GitHub
