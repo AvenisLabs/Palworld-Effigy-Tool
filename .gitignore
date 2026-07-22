@@ -19,7 +19,5 @@ save/
 steam_post.txt
 reddit_post.md
 
-# Local-only data/logs (untracked 2026-07-22; still bundled into the exe
-# via the spec — a source checkout needs a local relic_master.json to build)
-relic_master.json
+# Local-only log (untracked 2026-07-22)
 summarylog.md
