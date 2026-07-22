@@ -1,5 +1,12 @@
-# Effigy Grant Tool v1.10
+# Effigy Grant Tool v1.11
 
+> **⚠️ Official source:** this public repository
+> (`github.com/AvenisLabs/Palworld-Effigy-Tool`) is the **only**
+> distribution point for this tool. It is not distributed anywhere else —
+> copies found on other sites may be compromised. Download only from this
+> repo's Releases page.
+
+> v1.11: official-source warning added to readmes and in-app help.
 > v1.10: documented the Steam effigy-achievement bug this tool works
 > around (readmes + in-app help): the achievement only triggers with
 > unallocated effigy points, so the grant must run on a save where no

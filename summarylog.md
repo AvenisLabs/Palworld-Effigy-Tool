@@ -1,5 +1,10 @@
 # Summary Log
 
+## 2026-07-22 05:14 — Official-source warning
+- `grant_gui.py` v1.6: new Help section "Official source — beware of copies" (GitHub repo is the ONLY distribution point; copies elsewhere may be compromised); repo link added to About.
+- `EFFIGY_README.md`: ⚠️ Official source section; `README.md` v1.11: warning blockquote at the top.
+- Smoke-tested, exe rebuilt (exit 0), dist synced. Release rolled v1.10 → v1.11 with updated assets.
+
 ## 2026-07-22 05:06 — Achievement-bug documentation everywhere
 - `grant_gui.py` v1.5: Help now opens with "The achievement bug (read first)" — why the achievement breaks (points allocated on pickup) and the must-use-unallocated-save rule.
 - `EFFIGY_README.md`: new "Why this tool exists" section with the same explanation + important callout.

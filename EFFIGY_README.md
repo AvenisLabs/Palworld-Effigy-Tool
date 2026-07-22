@@ -29,6 +29,19 @@ so the achievement logic finally sees what it expects.
 > world). Allocated points are exactly what breaks the achievement —
 > granting on top of an already-broken save will not un-break it.
 
+## ⚠️ Official source — beware of copies
+
+The **only** source for this tool is the public open-source GitHub
+repository:
+
+**https://github.com/AvenisLabs/Palworld-Effigy-Tool**
+
+It is **not** distributed anywhere else — no other download sites, no
+mirrors, no reuploads. If you got this tool from anywhere other than that
+repository's Releases page, **it could be compromised** (tampered with or
+bundled with malware). Delete it and download a fresh copy from the
+official repository.
+
 ---
 
 ## Quick start

@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""grant_gui.py v1.5 — minimal tkinter GUI for the effigy grant tool.
+"""grant_gui.py v1.6 — minimal tkinter GUI for the effigy grant tool.
+
+v1.6: Help gains an "Official source" section — the public GitHub repo is
+      the ONLY distribution point; copies found elsewhere may be
+      compromised.
 
 v1.5: Help gains a leading "The achievement bug" section — why the Steam
       effigy achievement breaks (points allocated on pickup) and why the
@@ -119,10 +123,21 @@ directly contains "Players"."""),
   read (for player names).
 - The player being edited must not be in the game while you edit — their
   live state would overwrite the change."""),
+    ("Official source — beware of copies", """\
+The ONLY source for this tool is the public open-source GitHub repository:
+
+    https://github.com/AvenisLabs/Palworld-Effigy-Tool
+
+It is NOT distributed anywhere else — no other download sites, no mirrors,
+no reuploads. If you got this tool from anywhere other than that
+repository's Releases page, it could be COMPROMISED (tampered with or
+bundled with malware). Delete it and download a fresh copy from the
+official repository."""),
     ("About", """\
 Effigy Grant Tool
 © 2026 AvenisLabs — https://avenislabs.com
-Built for KarasWorlds.com — https://karasworlds.com"""),
+Built for KarasWorlds.com — https://karasworlds.com
+Official source: https://github.com/AvenisLabs/Palworld-Effigy-Tool"""),
 ]
 
 
