@@ -1,5 +1,8 @@
 # Summary Log
 
+## 2026-07-22 05:00 — Reddit post drafted
+- Wrote `reddit_post.md` (v1.0): Markdown post for r/Palworld with 3 title options, TL;DR-first structure, bug explanation, unallocated-save requirement, safety/open-source angle, releases link.
+
 ## 2026-07-22 04:56 — Steam Community post drafted
 - Verified repo is now PUBLIC.
 - Wrote `steam_post.txt` (v1.0): BBCode post explaining the effigy-achievement bug (achievement never triggers when points are allocated on pickup), the must-use-on-unallocated-save requirement, usage steps, safety, and the public GitHub releases link.
